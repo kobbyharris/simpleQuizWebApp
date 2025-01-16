@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vehicle Tracking</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        #map {
+            width: 100%;
+            height: 100%;
+        }
+
+        #pac-input {
+            background: white;
+            border: 1px solid #ccc;
+            padding: 8px 12px;
+            border-radius: 4px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            font-size: 14px;
+            width: 300px;
+            margin: auto 0;
+        }
+
+       
+    </style>
+    <script>
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            sidebar.classList.toggle('hidden');
+        }
+    </script>
+</head>
+
+<body class="bg-gray-50 font-sans">
+    <div class="flex h-screen">
+        <!--sidebar-->
+        <div th:insert="~{user/fragments/sidebar :: sidebar}"></div>
+        <!--sidebar end-->
+
+
+        <!-- Main Content -->
+        <div class="flex-1 bg-white overflow-y-auto">
+
+            <!-- Header -->
+            <div th:insert="~{user/fragments/header :: header}"></div>
+            <!--header end-->
+
+            
+            <!-- Map -->
+            <div id="map"></div>
+ 
+            <!-- Load the Google Maps JavaScript API with the Places library -->
+        
+            <script async defer
+                src="https://maps.gomaps.pro/maps/api/js?key=AlzaSy6wTSHOaGEA0P6g6PRIKw8tvOdrEyX1nSd&libraries=geometry,places&callback=initMap" type="text/javascript">
+            </script>
+            <div id="street-view"></div>
+
+            <div class="fixed bottom-5 right-5 bg-white shadow-lg rounded-lg w-80">
+                <!-- Header -->
+                <div class="bg-gray-200 px-4 py-2 flex items-center justify-between rounded-t-lg">
+                    <!-- Back Button (Hidden by Default) -->
+                    <button id="backButton" onclick="showUnits()" class="hidden text-gray-500 hover:text-blue-500">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-5 w-5">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+                        </svg>
+                    </button>
+                    <!-- Header Title -->
+                    <p id="headerTitle" class="text-gray-800 font-bold">Units</p>
+                    <!-- Placeholder for spacing -->
+                    <div class="w-5"></div>
+                </div>
+            
+                <!-- Content Sections -->
+                <div class="p-4">
+                    <!-- Units Section -->
+                    <div id="unitsSection" class="space-y-4">
+                        <!-- Unit Item 1 -->
+                        <div class="flex items-center justify-between border-b pb-3">
+                            <div class="flex items-center">
+                                <img src="https://img.icons8.com/color/48/car--v1.png" alt="Car Icon" class="h-10 w-10 mr-3">
+                                <div>
+                                    <p class="text-gray-800 font-bold">F-150</p>
+                                    <p class="text-gray-500 text-sm">19:12:36</p>
+                                </div>
+                            </div>
+                            <!-- Hamburger Icon Dropdown -->
+                            <div class="relative">
+                                <button onclick="toggleDropdown(this)" class="text-gray-500 hover:text-blue-500">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-5 w-5">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                                    </svg>
+                                </button>
+                                <!-- Dropdown Menu -->
+                                <div class="absolute right-0 mt-2 w-24 bg-white shadow-lg rounded-lg hidden">
+                                    <button onclick="showDetails()" class="w-full text-left px-4 py-2 hover:bg-gray-100 text-gray-800">Details</button>
+                                </div>
+                            </div>
+                        </div>
+            
+                        <!-- Unit Item 2 -->
+                        <div class="flex items-center justify-between border-b pb-3">
+                            <div class="flex items-center">
+                                <img src="https://img.icons8.com/color/48/car--v1.png" alt="Car Icon" class="h-10 w-10 mr-3">
+                                <div>
+                                    <p class="text-gray-800 font-bold">330 P3</p>
+                                    <p class="text-gray-500 text-sm">19:13:20</p>
+                                </div>
+                            </div>
+                            <!-- Hamburger Icon Dropdown -->
+                            <div class="relative">
+                                <button onclick="toggleDropdown(this)" class="text-gray-500 hover:text-blue-500">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-5 w-5">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                                    </svg>
+                                </button>
+                                <!-- Dropdown Menu -->
+                                <div class="absolute right-0 mt-2 w-24 bg-white shadow-lg rounded-lg hidden">
+                                    <button onclick="showDetails()" class="w-full text-left px-4 py-2 hover:bg-gray-100 text-gray-800">Details</button>
+                                </div>
+                            </div>
+                        </div>
+            
+                        <!-- Unit Item 3 -->
+                        <div class="flex items-center justify-between border-b pb-3">
+                            <div class="flex items-center">
+                                <img src="https://img.icons8.com/color/48/motorcycle.png" alt="Bike Icon" class="h-10 w-10 mr-3">
+                                <div>
+                                    <p class="text-gray-800 font-bold">SF90</p>
+                                    <p class="text-gray-500 text-sm">19:14:02</p>
+                                </div>
+                            </div>
+                            <!-- Hamburger Icon Dropdown -->
+                            <div class="relative">
+                                <button onclick="toggleDropdown(this)" class="text-gray-500 hover:text-blue-500">
+                                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" class="h-5 w-5">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                                    </svg>
+                                </button>
+                                <!-- Dropdown Menu -->
+                                <div class="absolute right-0 mt-2 w-24 bg-white shadow-lg rounded-lg hidden">
+                                    <button onclick="showDetails()" class="w-full text-left px-4 py-2 hover:bg-gray-100 text-gray-800">Details</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            
+                    <!-- Details Section (Hidden by Default) -->
+                    <div id="detailsSection" class="hidden space-y-4">
+                        <!-- Location Details -->
+                        <div class="space-y-2">
+                            <div class="flex items-center">
+                                <img src="https://img.icons8.com/color/48/car--v1.png" alt="Car Icon" class="h-10 w-10 mr-3">
+                                <div>
+                                    <p class="text-gray-800 font-bold">F-150</p>
+                                </div>
+                            </div>
+                            <p class="text-gray-800"><strong>Location:</strong> Latitude: 12.345, Longitude: -67.890</p>
+                            <p class="text-gray-800"><strong>Status:</strong> Moving</p>
+                            <p class="text-gray-800"><strong>Distance:</strong> 150 km</p>
+                            <p class="text-gray-800"><strong>Time:</strong> 2 hours 30 minutes</p>
+                            <p class="text-gray-800"><strong>Address:</strong> 123 Main St, Cityville</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- JavaScript -->
+            <script>
+            // Toggle Dropdown Visibility
+            function toggleDropdown(button) {
+                const dropdown = button.nextElementSibling;
+                dropdown.classList.toggle('hidden');
+            }
+
+            // Show Details Section
+            function showDetails() {
+                document.getElementById('unitsSection').classList.add('hidden');
+                document.getElementById('detailsSection').classList.remove('hidden');
+                document.getElementById('headerTitle').textContent = 'Details';
+                document.getElementById('backButton').classList.remove('hidden');
+            }
+
+            // Show Units Section
+            function showUnits() {
+                document.getElementById('detailsSection').classList.add('hidden');
+                document.getElementById('unitsSection').classList.remove('hidden');
+                document.getElementById('headerTitle').textContent = 'Units';
+                document.getElementById('backButton').classList.add('hidden');
+                
+                // Hide any open dropdowns when returning to the units section
+                const openDropdowns = document.querySelectorAll('.absolute:not(.hidden)');
+                openDropdowns.forEach(dropdown => {
+                    dropdown.classList.add('hidden');
+                });
+            }
+            </script>
+
+                       
+            
+
+            <!-- Load Google Maps JavaScript API -->
+          
+            
+            <script>
+                let map, streetView, geocoder, autocomplete;
+                const vehicleMarkers = {};
+
+                function initMap() {
+                    map = new google.maps.Map(document.getElementById('map'), {
+                        center: { lat: -33.8688, lng: 151.2195 },
+                        zoom: 13
+                    });
+
+                    geocoder = new google.maps.Geocoder();
+                    streetView = new google.maps.StreetViewPanorama(document.getElementById('street-view'));
+                    map.setStreetView(streetView);
+
+                    autocomplete = new google.maps.places.Autocomplete(document.getElementById('pac-input'));
+                    autocomplete.bindTo('bounds', map);
+
+                    autocomplete.addListener('place_changed', () => {
+                        const place = autocomplete.getPlace();
+                        if (!place.geometry) {
+                            alert("No details available for input: '" + place.name + "'");
+                            return;
+                        }
+                        map.setCenter(place.geometry.location);
+                        map.setZoom(15);
+                    });
+
+                    addVehicles();
+                    document.getElementById('my-location').addEventListener('click', goToMyLocation);
+                    document.getElementById('toggle-street-view').addEventListener('click', toggleStreetView);
+                }
+
+                function addVehicles() {
+                    const vehicles = [
+                        { id: 'car1', lat: -33.8708, lng: 151.2095, status: 'moving' },
+                        { id: 'car2', lat: -33.8688, lng: 151.2093, status: 'idle' },
+                    ];
+
+                    vehicles.forEach(vehicle => {
+                        const marker = new google.maps.Marker({
+                            map,
+                            position: { lat: vehicle.lat, lng: vehicle.lng },
+                            title: `Vehicle: ${vehicle.id} (${vehicle.status})`,
+                        });
+
+                        vehicleMarkers[vehicle.id] = { marker, data: vehicle };
+                    });
+                }
+
+                function goToMyLocation() {
+                    if (navigator.geolocation) {
+                        navigator.geolocation.getCurrentPosition(position => {
+                            const myLocation = {
+                                lat: position.coords.latitude,
+                                lng: position.coords.longitude
+                            };
+                            map.setCenter(myLocation);
+                            new google.maps.Marker({
+                                map,
+                                position: myLocation,
+                                title: "You are here"
+                            });
+                        });
+                    } else {
+                        alert("Geolocation is not supported by this browser.");
+                    }
+                }
+
+                function toggleStreetView() {
+                    const current = streetView.getVisible();
+                    streetView.setVisible(!current);
+                }
+            </script>
+        </div>
+    </div>
+</body>
+
+</html>

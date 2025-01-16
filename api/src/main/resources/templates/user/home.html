@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script th:src="@{/js/main.js}"></script>
+    <link rel="stylesheet"th:href="@{/css/fonts.css}">
+    <style>
+        /* Add click and hover effects */
+        .clickable:hover {
+            background-color: #f3f4f6; /* Lighter background on hover */
+            cursor: pointer; /* Change cursor to indicate clickability */
+        }
+
+        .clickable:active {
+            transform: scale(0.98); 
+            background-color: #e5e7eb; /
+        }
+
+        /* Modal Close Button */
+        .modal .text-2xl {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+        }
+
+        /* Hide the scrollbar track */
+        ::-webkit-scrollbar {
+            width: 10px;
+            background: transparent;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 50px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+
+        * {
+            scrollbar-width: thin;
+            scrollbar-color: #888 transparent;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans leading-normal tracking-normal">
+<div class="flex h-screen">
+    <!-- Sidebar -->
+    <div th:insert="~{user/fragments/sidebar :: sidebar}"></div>
+    <!-- Sidebar End -->
+
+    <!-- Main Content -->
+    <div class="flex-1 bg-white overflow-y-auto">
+        <!-- Header -->
+        <div th:insert="~{user/fragments/header :: header}"></div>
+
+        <!-- Navigation Section -->
+        <div th:insert="user/fragments/header :: navigation"></div>
+
+        <!-- Overview Section -->
+        <div class="min-h-screen flex flex-col lg:flex-row gap-6 p-6">
+            <!-- Left Column -->
+            <div class="flex-1 grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <!-- Top Full-Width Box -->
+                <div class="bg-white p-6 rounded-lg shadow transition col-span-1 lg:col-span-2">
+                    <div class="flex items-center gap-4">
+                        <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center">
+                            <img src="/static/img/vTSLogo.png" alt="vehicle-manage-icon" class="w-8 h-8">
+                        </div>
+                        <div>
+                            <h3 class="text-lg font-bold text-gray-800">Vehicle Management</h3>
+                            <p class="text-gray-600 text-sm">create, update or delete vehicles</p>
+                            <a href="#" class="mt-4 bg-blue-500 text-white py-2 px-4 rounded-lg shadow hover:bg-blue-600 transition text-center text-blue-500 font-medium mt-2 inline-block">Add vehicles</a>
+                            <a href="#" class="mt-4 py-2 px-4 transition text-center font-medium mt-2 inline-block">Manage vehicles</a>
+                        </div>
+                    </div>
+                </div>
+
+            
+                <a href="/tracking-system" class="bg-white p-6 rounded-lg shadow hover:shadow-lg transition clickable block">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-green-100 rounded-full flex items-center justify-center">
+                            <img src="/static/img/vTSLogo.png" alt="tracking-icon" class="w-6 h-6">
+                        </div>
+                        <div>
+                            <h3 class="text-md font-bold text-gray-800">Tracking System</h3>
+                            <p class="text-gray-600 text-sm">Get real-time location and status of vehicles</p>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Driver Management -->
+                <a href="/driver-management" class="bg-white p-6 rounded-lg shadow hover:shadow-lg transition clickable block">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-yellow-100 rounded-full flex items-center justify-center">
+                            <img src="/static/img/vTSLogo.png" alt="Driver Management Icon" class="w-6 h-6">
+                        </div>
+                        <div>
+                            <h3 class="text-md font-bold text-gray-800">Driver Management</h3>
+                            <p class="text-gray-600 text-sm">Manage all in one place</p>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Settings -->
+                <a href="/settings" class="bg-white p-6 rounded-lg shadow hover:shadow-lg transition clickable block">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-purple-100 rounded-full flex items-center justify-center">
+                            <img src="/static/img/vTSLogo.png" alt="Settings Icon" class="w-6 h-6">
+                        </div>
+                        <div>
+                            <h3 class="text-md font-bold text-gray-800">Settings</h3>
+                            <p class="text-gray-600 text-sm">Update, delete account</p>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Reports -->
+                <a href="/reports" class="bg-white p-6 rounded-lg shadow hover:shadow-lg transition clickable block">
+                    <div class="flex items-center gap-4">
+                        <div class="w-12 h-12 bg-red-100 rounded-full flex items-center justify-center">
+                            <img src="/static/img/vTSLogo.png" alt="Reports Icon" class="w-6 h-6">
+                        </div>
+                        <div>
+                            <h3 class="text-md font-bold text-gray-800">Reports</h3>
+                            <p class="text-gray-600 text-sm">Help us improve</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+
+            <!-- Right Column -->
+            <div class="w-full lg:w-1/3 bg-white p-6 rounded-lg shadow flex flex-col justify-between">
+                <div>
+                    <h3 class="text-lg font-bold text-gray-800 mb-4">Active Vehicles</h3>
+                    <p class="text-gray-600 text-sm">Sorry an error occured</p>
+                </div>
+                <a href="#" class="mt-4 hover:bg-gray-100 py-2 px-4 rounded-lg shadow transition text-center">Refresh</a>
+            </div>
+        </div>
+
+
+
+    </div>
+</div>
+</body>
+</html>
