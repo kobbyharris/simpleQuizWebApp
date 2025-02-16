@@ -1,0 +1,462 @@
+/* utilities */
+@font-face {
+    font-family: poppins-bold;
+    src: url('fonts/Poppins-ExtraBoldItalic.ttf');
+}
+
+@font-face {
+    font-family: poppins-medium;
+    src: url('fonts/Poppins-Medium.ttf');
+}
+
+@font-face {
+    font-family: poppins-extraBold;
+    src: url('fonts/Poppins-ExtraBold.ttf');
+}
+
+:root {
+    --bodyBgColor: #ffffff;
+    --clr--darkBrown: rgb(39, 38, 39);
+    --clr--darkColor: rgb(17, 16, 17);
+    --clr--mainWhite: white;
+    --clr--gd: rgb(109, 68, 197), rgb(206, 41, 135), rgba(255, 115, 0, 0.938);
+    --clr--hover: rgb(54, 54, 54);
+    --clr--maingrey: rgb(247, 247, 247);
+    --clr--mainBorder: rgb(240, 240, 240);
+    --clr--crimson: #DC143C;
+    --clr--slate-blue: #6A5ACD;
+    --clr--headerBottomBorder: hsla(0, 0%, 61%, 0.336);
+    --clr--inputBgColor: rgb(232,240,254);
+}
+
+html {
+    scrollbar-width: thin;
+    scroll-behavior: smooth;
+}
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    font-family: 'poppins-medium', 's', sans-serif;
+    background-color: var(--bodyBgColor);
+    width: minmax(100%, 1000px);
+    height: 100vh;
+    overflow-y: auto;
+    display: flex;
+    flex-flow: column nowrap;
+}
+
+header {
+    border-bottom: 1px solid var(--clr--mainBorder);
+}
+
+.header-wrapper {
+    display: flex;
+    width: 80%;
+    margin: auto;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: .6em;
+}
+
+.logo h1 {
+    font-family: poppins-bold;
+    text-align: center;
+    font-size: 60px;
+    border-radius: 5px;
+    color: transparent;
+    color: var(--clr--darkBrown);
+    background-clip: text;
+}
+
+.logo p {
+    color: var(--clr--darkBrown);
+    font-size: 1.2em;
+}
+
+.details{
+    display: flex;
+    align-items: center;
+}
+
+.signup a:hover{
+    background-color: var(--clr--hover);
+    color: var(--clr--mainWhite);
+}
+
+.signup a{
+    display: inline-block; 
+    text-decoration: none;
+    padding: 7px 10px;
+    border-radius: 5px;
+    background-color: var(--bodyBgColor);
+    color: var(--clr--darkColor);
+    border: 1px solid var(--clr--darkBrown);
+}
+
+
+.mobile-nav{
+    display: none;
+}
+main {
+    flex: 1;
+    width: 90%;
+}
+
+.inner-container {
+    display: grid;
+    grid-template-columns: 20% 70%;
+    background-color: rgb(255, 255, 255);
+    margin: 0 auto;
+}
+
+.navigation {
+    border-right: 1px solid rgba(163, 163, 163, 0.397);
+    display: grid;
+    grid-template-rows: 60% 40%;
+}
+
+.innerNav {
+    display: flex;
+    flex-flow: column;
+    justify-content: space-evenly;
+    align-items: flex-start;
+}
+
+.innerNav div {
+    width: 95%;
+}
+
+.innerNav a {
+    text-decoration: none;
+    box-sizing: border-box;
+    display: block;
+    width: 100%;
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    border: 1px;
+    height: 2.2em;
+    gap: .2em;
+    border-radius: 5px;
+    color: var(--clr--darkBrown);
+    white-space: nowrap;
+}
+
+.innerNav a:hover {
+    background-color: hsla(0, 0%, 93%, 0.329);
+}
+
+.innerNav a img {
+    display: inline;
+}
+
+
+
+.inner-main-page {
+    display: flex;
+    flex-flow: column;
+}
+
+
+
+.greetings {
+    margin: 40px 30px;
+}
+
+.greetings p{
+    color: rgba(128, 128, 128, 0.733);
+}
+
+
+.achievements div{
+    margin: 1em;
+    border: 1px solid var(--clr--headerBottomBorder);
+    background-color: var(-);
+    border-radius: 5px;
+    flex-basis: 100%;
+    text-indent: 0.5em;
+}
+
+.achievements div p{
+    margin-top: 10px;
+}
+
+.achievements div h2{
+    font-size: 2em;
+}
+
+.tracking {
+    margin: 30px;
+    display: flex;
+    flex-flow: column;
+    text-align: justify;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th, td {
+    padding: 8px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+th {
+    background-color: #f2f2f2;
+    border: 1px solid var(--clr--headerBottomBorder);
+}
+
+
+td:first-child {
+    border-left: none;
+}
+
+td:last-child {
+    border-right: none;
+}
+
+
+.courses-categories {
+    margin: 20px;
+    display: flex;
+    flex-flow: column;
+}
+
+.categories-header {
+    display: flex;
+    flex-flow: row;
+    justify-content: space-between;
+    margin: 0 20px;
+}
+
+.categories-header a{
+    text-decoration: none;
+    color: var(--clr--slate-blue);
+}
+
+.card-wrapper {
+    display: flex;
+    flex-flow: row wrap;
+    gap: 4em;
+    margin: 0 20px;
+}
+.card-wrapper .card{
+    cursor: pointer;
+    width: min(50%, 40%);
+    height: 200px;
+    border: 1px ;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    border-radius: 10px;
+    box-shadow: 1px 1px 5px var(--clr--darkBrown);
+}
+
+
+.card-wrapper .card:nth-child(odd){
+    background-color: var(--clr--slate-blue);
+}
+
+.card-wrapper .card:nth-child(even){
+    background-color: var(--clr--crimson);
+}
+
+.card-wrapper .card:hover {
+    background-color: var(--clr--hover);
+    color: var(--clr--mainWhite);
+}
+
+
+.card-wrapper .card img{
+    flex-basis: 50%;
+    margin: 10px 0;
+    align-self: center;
+}
+
+.card-wrapper .card h3{
+    line-height: 2;
+    text-align: center;
+}
+.card-wrapper .card p{
+    overflow: hidden;
+    word-wrap: break-word;
+    
+}
+
+
+@media screen and  (max-width: 968px) {
+
+    body {
+        font-family: 'poppins-medium', 's', sans-serif;
+        background-color: var(--bodyBgColor);
+        width: minmax(100%, 1000px);
+        height: 100vh;
+        overflow-y: auto;
+        display: flex;
+        flex-flow: column nowrap;
+    }
+    
+    header, main, footer{
+        display: grid;
+    }
+
+    header {
+        border-bottom: 1px solid var(--clr--mainBorder);
+    }
+    
+    .mobile-nav{
+        display: flex;
+        flex-flow: row nowrap;
+        cursor: pointer;
+    }
+
+
+    .header-wrapper {
+        display: flex;
+        width: 95%;
+        margin: auto;
+        justify-content: space-between;
+        align-items: center;
+    }
+    
+    .logo {
+        align-self: center;
+        display: flex;
+        align-items: center;
+        gap: .6em;
+    }
+    
+    .logo h1 {
+        font-family: poppins-bold;
+        text-align: center;
+        font-size: 60px;
+        border-radius: 5px;
+        color: transparent;
+        color: var(--clr--darkBrown);
+        background-clip: text;
+    }
+    
+    .logo p {
+        color: var(--clr--darkBrown);
+        font-size: 1.2em;
+    }
+    
+    .details{
+        display: flex;
+        align-items: center;
+    }
+    
+    .signup a:hover{
+        background-color: var(--clr--hover);
+        color: var(--clr--mainWhite);
+    }
+    
+    .signup a{
+        display: inline-block; 
+        text-decoration: none;
+        padding: 7px 10px;
+        border-radius: 5px;
+        background-color: var(--bodyBgColor);
+        color: var(--clr--darkColor);
+        border: 1px solid var(--clr--darkBrown);
+    }
+
+
+    main {
+        flex: 1;
+        width: 100%;
+    }
+    
+    .inner-container {
+        display: flex;
+        flex-flow: column;
+    }
+    .navigation{
+        background-color: var(--clr--mainWhite);
+        height: 100%;
+        display: none;
+        position: absolute;
+        width: 70%;
+        top: 1;
+    }
+
+
+    .innerNav {
+        display: flex;
+        flex-flow: column;
+        gap: 2em;
+    }
+    
+    .innerNav div {
+        margin-left: 10px;
+        width: 90%;
+    }
+
+    .innerNav div:nth-child(1){
+        margin-top: 20px;
+    }
+    
+    .innerNav a {
+        text-decoration: none;
+        box-sizing: border-box;
+        display: flex;
+        width: 100%;
+        display: flex;
+        flex-flow: row;
+        align-items: center;
+        border: 1px;
+        height: 2.2em;
+        gap: .2em;
+        border-radius: 5px;
+        color: var(--clr--darkBrown);
+        white-space: nowrap;
+    }
+    
+    .innerNav a:hover {
+        background-color: hsla(0, 0%, 93%, 0.329);
+    }
+
+    label img[alt="close"]{
+        display: none;
+    }
+    
+    .innerNav a img {
+        display: inline;
+        margin-left: 8px;
+    }
+    
+
+    main{
+        width: 100%;
+    }
+
+    .navigation.show{
+        display: block;
+    }
+    
+    .headerName{
+        display: none;
+    }
+
+    .headerImage{
+        border: 1px solid var(--clr--mainBorder);
+        border-radius: 50%;
+    }
+
+    .logo{
+        align-self: center;
+        display: flex;
+    }
+}
